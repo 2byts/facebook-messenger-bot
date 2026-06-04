@@ -1,96 +1,432 @@
+# 🤖 Anu Bot
+
 <div align="center">
 
-# fbchat-muqit Facebook & Messenger API
+### Messenger Group Assistant
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/fbchat-muqit)
-![PyPI - Version](https://img.shields.io/pypi/v/fbchat-muqit)
-[![License: GPLv3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+AI Chat • Anime Search • Group Management • Telegram Forwarder
 
-**fbchat-muqit** An Unofficial Asynchronous Facebook Messenger API designed to interact with Facebook and Messenger. As It is an Unofficial API we are not responsible if you get banned by Facebook. We recommend to use a dummy Facebook account. For more details check the [Documentation](http://fbchat-muqit.rtfd.io/).
+Created by **Arafat Hoshen Zihad**
+
+[Facebook](https://www.facebook.com/arafat.hosen.zihad) • [Instagram](https://www.instagram.com/agen_t0919/) • [GitHub](https://github.com/2byts) • [LinkedIn](https://www.linkedin.com/pub/dir/Arafat/Hoshen)
 
 </div>
 
-> [!Note]
-> Bumped from version `1.1.31` to `1.2.0` and version `1.2.0` is a rewrite version meaning the library has been fully rewritten and Major changes has been made. The API is now fully Documented and the usage examples are updated.
+---
 
-> [!WARNING]
-> Due to `end-to-end` encryption sending messages to other Users is not supported anymore. You can send messages to Group Chat, Room Chat and to pages. [See more](https://about.fb.com/news/2024/03/end-to-end-encryption-on-messenger-explained/)
-> You may still be able to send messages to another User if the that User account is inactive for many years because `end-to-end` encryption is not applied when sending message to those account unless the account is Opened again.
+## 🌸 About
 
-## 🛠️ Installation
+Anu Bot is a Facebook Messenger assistant built with Python and fbchat-muqit.
 
-You can install fbchat-muqit using pip:
+It includes AI conversations, anime utilities, group moderation tools, welcome/bye plugins, Telegram-to-Messenger forwarding, and various automation features.
+
+This project was created for learning, experimentation, and personal use.
+
+---
+
+## ✨ Features
+
+### 🤖 AI Features
+
+* AI chat using `/anu`
+* Fast response handling
+* Custom roleplay personalities
+
+### 🎌 Anime Features
+
+* Anime information lookup
+* Anime episode search
+* Anime poster support
+
+### 🛡️ Group Management
+
+* Ban users
+* Unban users
+* Remove users
+* Group settings system
+* Leave group command
+
+### 🎉 Group Plugins
+
+* Welcome messages
+* Goodbye messages
+* Join notifications
+* Startup admin notifications
+
+### 📡 Telegram Forwarder
+
+* Telegram → Messenger forwarding
+* Multiple Telegram sources
+* Route management
+* Enable/Disable forwarding
+* Persistent route settings
+
+### ⚙️ Admin Tools
+
+* Reload modules
+* Maintenance mode
+* Stop bot command
+* User information tools
+
+---
+
+## 📂 Project Structure
+
+```text
+.
+├── main.py
+├── bot_config.py
+├── config.example.json
+├── requirements.txt
+│
+├── commands/
+│   ├── admin/
+│   ├── group_control/
+│   ├── roleplay/
+│   ├── anime.py
+│   └── help.py
+│
+├── plugins/
+│   ├── assets/
+│   ├── join.py
+│   ├── bye.py
+│   ├── welcome.py
+│   ├── telegram.py
+│   └── telegram_forwarder.py
+│
+└── fbchat_muqit/
+```
+
+---
+
+## 🚀 Installation
+
+Clone the repository:
 
 ```bash
-pip install fbchat-muqit
-
+git clone https://github.com/2byts/anu.git
+cd anu
 ```
 
-For the latest development version:
+Install dependencies:
 
 ```bash
-pip install git+https://github.com/togashigreat/fbchat-muqit.git
-
+pip install -r requirements.txt
 ```
 
-## 📙 Documentation
-
-The API is Documented. [Read The Documentation](http://fbchat-muqit.rtfd.io/).
-The older version [1.1.31](https://fbchat-muqit.readthedocs.io/en/v1.1.31/) Documentation is available as well.
-
-## 🔧 Prerequisites
-
-- Python 3.9+
-- A Facebook account (It's safer to use old unused account)
-- Facebook account cookies 🍪
-
-## 📖 Usage Example
-
-To login in Facebook you will need Facebook account cookies. Since login via email and password is no longer supported.
-
-To get your Facebook account cookies. First login in your Facebook account and then add [C3C Chrome extension](https://github.com/c3cbot/c3c-ufc-utility) in your browser. Open a your Facebook account in a browser tab and use this extension to get your account cookies. Copy the cookies and save them in a json file. We will use the cookies to interact with Facebook server. We will call this account `Client` account.
-
-A basic example of How to use it.
-
-```python
-from fbchat_muqit import Client, Message, EventType
-
-client = Client(cookies_file_path="cookies.json")
-
-@client.event
-async def on_message(message: Message):
-    # To avoid spam check if sender_id is client's id or not
-    if message.sender_id != client.uid:
-        # echo the message
-        await client.send_message(message.text, message.thread_id)
-
-client.run()
-
-```
-
-Save the code in file `test.py` and now run the code.
+Create configuration:
 
 ```bash
-python3 test.py
+cp config.example.json config.json
 ```
 
-If It logins succesfully then Use another Facebook account to create a messenger group and add both of the accounts to the group. Now, send message to the group and fbchat_muqit Client account will listen to all incoming messages and events. If everything works properly It should reply and react to the message sent by your other account with an emoji.
+Add your settings:
 
-## Local config
+* Facebook Admin IDs
+* API Keys
+* Telegram Credentials
+* Forwarding Routes
 
-Copy `config.example.json` to `config.json`, then fill in your private values.
-Do not commit `config.json`, `cookies.json`, Telegram session files, or anything in `runtime/`.
+Add Facebook cookies:
 
-### 📄 License
+```text
+cookies.json
+```
 
-This project is distributed under a dual-license model:
+---
 
-- **BSD-3-Clause License**: Parts of the code are reused and adapted from the original [fbchat](https://github.com/fbchat-dev/fbchat) library, licensed under the BSD-3-Clause License.
-  See [LICENSE-BSD](./LICENSE-BSD.md) for details.
+## 🧩 Run Options
 
-- **GPL v3 License**: New contributions and modifications by Muhammad MuQiT/togashigreat are licensed under the GPL v3.0 License.
-  See [LICENSE](./LICENSE.md) for details.
+You can run Anu Bot in several ways depending on where you want to host it.
 
-### ✉️Contact Me
+### Option 1: PC / Local Python
 
-- [Facebook](https://facebook.com/muqit.dev)
+Best for testing on your own computer.
+
+Requirements:
+
+* Python 3.10+
+* `pip`
+* `config.json`
+* `cookies.json`
+
+Run:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp config.example.json config.json
+python plugins/telegram.py
+python main.py
+```
+
+On Windows:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+copy config.example.json config.json
+python plugins/telegram.py
+python main.py
+```
+
+### Option 2: Python Server / VPS / Hosting Panel
+
+Best for 24/7 hosting on a Python server, VPS, or panel like HidenCloud.
+
+Upload these files/folders:
+
+```text
+main.py
+bot_config.py
+commands/
+plugins/
+fbchat_muqit/
+requirements.txt
+config.json
+cookies.json
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start command:
+
+```bash
+python main.py
+```
+
+If Telegram is not logged in yet:
+
+```bash
+python plugins/telegram.py
+```
+
+Then restart the bot.
+
+### Option 3: Replit
+
+Best for simple cloud testing.
+
+1. Create a new Python Replit.
+2. Upload or import this repository.
+3. Add `config.json` and `cookies.json` manually.
+4. Open the Shell and install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Run Telegram login once if needed:
+
+```bash
+python plugins/telegram.py
+```
+
+6. Set the Replit run command to:
+
+```bash
+python main.py
+```
+
+Note: Replit may sleep on free plans, so forwarding may stop when the repl sleeps.
+
+### Option 4: Docker
+
+Best for VPS or container hosting.
+
+Create a `Dockerfile`:
+
+```dockerfile
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "main.py"]
+```
+
+Build:
+
+```bash
+docker build -t anu-bot .
+```
+
+Run:
+
+```bash
+docker run -it --name anu-bot \
+  -v $(pwd)/config.json:/app/config.json \
+  -v $(pwd)/cookies.json:/app/cookies.json \
+  -v $(pwd)/telegram_session.session:/app/telegram_session.session \
+  anu-bot
+```
+
+For first Telegram login in Docker:
+
+```bash
+docker run -it --rm \
+  -v $(pwd)/config.json:/app/config.json \
+  -v $(pwd)/telegram_session.session:/app/telegram_session.session \
+  anu-bot python plugins/telegram.py
+```
+
+---
+
+## ▶️ Run
+
+Start the bot:
+
+```bash
+python main.py
+```
+
+Telegram login:
+
+```bash
+python plugins/telegram.py
+```
+
+---
+
+## 📜 Commands
+
+### 🌷 General
+
+```text
+/help
+/ping
+/time
+/anu <message>
+```
+
+### 🎌 Anime
+
+```text
+/ anime <name>
+/ aniget <name> <episode>
+```
+
+Example:
+
+```text
+/ anime Naruto
+/ aniget Naruto 5
+```
+
+### 🛡️ Group Control
+
+```text
+/ban
+/unban
+/remove
+/settings
+/settings <key> <on/off>
+/out
+```
+
+### 📡 Telegram
+
+```text
+/tgstatus
+/tgstart
+/tgstop
+
+/tgadd <telegram_source> <thread_id>
+/tgremove <telegram_source>
+
+/tgon <telegram_source>
+/tgoff <telegram_source>
+```
+
+### ⚙️ Admin
+
+```text
+/reload
+
+/maintain run
+/maintain end
+
+/stop
+```
+
+---
+
+## 📡 Telegram Route Example
+
+```json
+{
+  "source": "-1001234567890",
+  "target_thread_id": "9876543210",
+  "enabled": true
+}
+```
+
+---
+
+## 👨‍💻 Developer
+
+### Arafat Hoshen Zihad
+
+🇧🇩 Bangladeshi Developer
+
+#### Social Links
+
+🌐 Facebook
+https://www.facebook.com/arafat.hosen.zihad
+
+📸 Instagram
+https://www.instagram.com/agen_t0919/
+
+💻 GitHub
+https://github.com/2byts
+
+💼 LinkedIn
+https://www.linkedin.com/pub/dir/Arafat/Hoshen
+
+---
+
+## ❤️ Credits
+
+Huge thanks to **Muhammad MuQiT (togashigreat)** for creating and maintaining the amazing **fbchat-muqit** library.
+
+Without this library, Messenger integration for Anu Bot would not have been possible.
+
+GitHub:
+https://github.com/togashigreat/fbchat-muqit
+
+PyPI:
+https://pypi.org/project/fbchat-muqit/
+
+Thank you for your hard work and contribution to the community ❤️
+
+---
+
+## ⚠️ Disclaimer
+
+This project is not affiliated with Facebook, Meta, Messenger, Telegram, AniList, or any third-party service.
+
+Using automation on Messenger may violate platform policies and could result in restrictions on your account.
+
+Use responsibly and preferably with a secondary account.
+
+The developer is not responsible for any misuse of this software.
+
+---
+
+<div align="center">
+
+### ⭐ Star the repository if you find it useful!
+
+Made with ❤️ by Arafat Hoshen Zihad
+
+</div>
