@@ -1,0 +1,51 @@
+{
+    "admins": [
+        {
+            "name": "Your Name",
+            "id": "YOUR_FACEBOOK_ID",
+            "facebook_url": "https://www.facebook.com/friends/requests/?profile_id=YOUR_FACEBOOK_ID"
+        }
+    ],
+    "facebook": {
+        "cookies_file": "cookies.json",
+        "cookie_refresh_interval_seconds": 10800
+    },
+    "bot": {
+        "name": "Hinata",
+        "nickname": "🌸 ʜɪɴᴀᴛᴀ 🌸",
+        "timezone_hours": 6
+    },
+    "groq": {
+        "api_key": "YOUR_GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile"
+    },
+    "telegram": {
+        "api_id": 123456,
+        "api_hash": "YOUR_TELEGRAM_API_HASH",
+        "phone": "+10000000000",
+        "session_file": "telegram_session",
+        "forwarder_auto_start": false,
+        "messenger_target_thread_id": "YOUR_MESSENGER_THREAD_ID",
+        "media_dir": "runtime/telegram_media",
+        "sources": [],
+        "routes": [
+            {
+                "source": "-1001234567890",
+                "target_thread_id": "YOUR_MESSENGER_GROUP_THREAD_ID",
+                "enabled": true
+            },
+            {
+                "source": "@telegram_channel_username",
+                "target_thread_id": "ANOTHER_MESSENGER_GROUP_THREAD_ID",
+                "enabled": false
+            }
+        ]
+    },
+    "paths": {
+        "anime_downloads": "runtime/anidown",
+        "anime_thumbnails": "runtime/thumbnails",
+        "roleplay_memory": "runtime/roleplay_memory",
+        "group_data": "runtime/group_data",
+        "forwarder_log": "runtime/forwarder_debug.log"
+    }
+}
